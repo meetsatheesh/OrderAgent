@@ -1,22 +1,27 @@
 # Production RAG Application: "Ask My Docs"
 
-This project implements a domain-specific "Ask My Docs" RAG (Retrieval-Augmented Generation) system.
+This project implements a domain-specific "Ask My Docs" RAG (Retrieval-Augmented Generation) system with advanced observability and evaluation.
 
 ## Architecture & Features
 
-- **Hybrid Retrieval**: Combines BM25 (dense keyword/sparse) with Vector Search (dense embeddings) using LangChain's `EnsembleRetriever`.
-- **Cross-Encoder Reranking**: Re-ranks the combined hybrid retrieval results using a HuggingFace cross-encoder model to boost precision before passing context to the LLM.
-- **Citation Enforcement**: Uses OpenAI's structured output generation via Pydantic to ensure models return exact document citations (`doc_id` mapping).
-- **CI-Gated Evaluation Pipeline**: Includes a basic PyTest evaluation suite integrated natively with GitHub Actions (`.github/workflows/eval.yml`) to enforce retrieval metrics and quality checks on Pull Requests.
+- **Hybrid Retrieval**: Combines BM25 with Vector Search using LangChain's `EnsembleRetriever`.
+- **Cross-Encoder Reranking**: Boosts precision using HuggingFace cross-encoders.
+- **Citation Enforcement**: Uses OpenAI's structured output via Pydantic for exact `doc_id` mapping.
+- **Advanced Observability**: 
+    - **Latency Tracking**: P50/P95 latency monitoring.
+    - **Cost Estimation**: Real-time token cost calculation for GPT-4o-mini.
+    - **LangSmith Integration**: Full tracing support for visual debugging.
+- **CI Regression Gating**: Automated performance and quality gates in GitHub Actions.
 
 ## Project Structure
 
-- `requirements.txt`: Python package dependencies.
-- `ingest.py`: Chunking, vector embeddings computation, and setting up our vector store (Chroma) and semantic cache (BM25).
-- `retrieval.py`: Setup for our EnsembleRetriever (hybrid search) wrapper and our contextual cross-encoder compressor.
-- `generation.py`: Pipeline connecting retrieval to OpenAI's structured generation. Returns the valid citation references cleanly.
-- `tests/test_evaluation.py`: Pytest-based evaluator simulating our CI gate.
-- `.github/workflows/eval.yml`: The YAML definition bridging evaluations automatically natively in repositories.
+- `ingest.py`: Document processing and vector store setup.
+- `retrieval.py`: Hybrid retrieval and reranking pipeline.
+- `generation.py`: RAG chain with observability and citation logic.
+- `observability.py`: Tracing, cost, and LangSmith configuration.
+- `evaluation_metrics.py`: LLM-as-a-judge quality scorers.
+- `tests/test_performance.py`: Performance and quality regression tests.
+- `.github/workflows/eval.yml`: CI pipeline definition.
 
 ## Quick Setup
 
@@ -26,19 +31,25 @@ This project implements a domain-specific "Ask My Docs" RAG (Retrieval-Augmented
    ```
 
 2. **Ingest Documents**:
-   This parses documents from `data/docs`, chunks them, assigns `doc_id`s, and persists data.
    ```bash
    python ingest.py
    ```
 
-3. **Query the System**:
-   Ensure you have an Open AI API key configured.
+3. **Set API Keys**:
    ```bash
-   export OPENAI_API_KEY=your-api-key
+   export OPENAI_API_KEY="your-openai-key"
+   export LANGCHAIN_API_KEY="your-langsmith-key" # Optional for tracing
+   ```
+
+4. **Query the System**:
+   ```bash
    python generation.py
    ```
 
-4. **Run Evaluations** (Local execution for CI checks):
+5. **Run Evaluations**:
    ```bash
-   pytest tests/test_evaluation.py
+   pytest tests/test_performance.py -v
    ```
+
+## LangSmith Setup
+To enable LangSmith tracing, simply provide your `LANGCHAIN_API_KEY`. Traces will be uploaded to the `RAG-Production-Project` project by default.

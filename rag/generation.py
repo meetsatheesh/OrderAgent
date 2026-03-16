@@ -5,13 +5,17 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from retrieval import get_retriever
 
+from observability import track_request, count_tokens, init_langsmith
+
 class AnswerWithCitations(BaseModel):
     answer: str = Field(description="The comprehensive answer to the user's question, based solely on the provided context.")
     citations: List[str] = Field(description="A list of document IDs (doc_id) that justify the answer.")
 
 def get_rag_chain():
+    # Initialize LangSmith if API Key is present
+    init_langsmith()
+    
     # Utilizing OpenAI to ensure strictly typed JSON/Structured output.
-    # Set OPENAI_API_KEY environment variable.
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     structured_llm = llm.with_structured_output(AnswerWithCitations)
 
@@ -28,6 +32,7 @@ def get_rag_chain():
         ("human", "{question}")
     ])
 
+    @track_request
     def formatted_rag(question: str):
         retriever = get_retriever()
         docs = retriever.invoke(question)
@@ -38,11 +43,21 @@ def get_rag_chain():
             formatted_context += f"{doc_id} | {d.page_content}\n\n"
             
         messages = prompt.format_messages(context=formatted_context, question=question)
+        
+        # Calculate input tokens
+        input_tokens = count_tokens(str(messages))
+        
         result = structured_llm.invoke(messages)
+        
+        # Calculate output tokens
+        output_tokens = count_tokens(result.answer)
         
         return {
             "response": result,
-            "retrieved_docs": docs
+            "retrieved_docs": docs,
+            "input_tokens": input_tokens,
+            "output_tokens": output_tokens,
+            "context": formatted_context
         }
 
     return formatted_rag

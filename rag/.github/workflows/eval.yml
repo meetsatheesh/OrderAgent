@@ -31,7 +31,17 @@ jobs:
           cd rag
           python ingest.py
 
-      - name: Run Retrieval Evaluation
+      - name: Run Basic Retrieval Tests
         run: |
           cd rag
           pytest tests/test_evaluation.py -v
+
+      - name: Run Performance & Quality Regression Gates
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
+          LANGCHAIN_TRACING_V2: "true"
+          LANGCHAIN_PROJECT: "RAG-CI-Eval"
+        run: |
+          cd rag
+          pytest tests/test_performance.py -v -m "performance or quality"
