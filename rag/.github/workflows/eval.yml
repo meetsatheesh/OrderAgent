@@ -1,0 +1,37 @@
+name: RAG Evaluation Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  evaluate-rag:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd rag
+          pip install -r requirements.txt
+
+      - name: Ingest Sample Data
+        run: |
+          cd rag
+          python ingest.py
+
+      - name: Run Retrieval Evaluation
+        run: |
+          cd rag
+          pytest tests/test_evaluation.py -v

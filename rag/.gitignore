@@ -1,0 +1,19 @@
+# Virtual environment
+.venv/
+env/
+venv/
+ENV/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local project data
+data/
+*.pkl
+
+# IDEs and OS
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,12 @@
+langchain
+langchain-community
+langchain-huggingface
+langchain-chroma
+langchain-openai
+sentence-transformers
+rank_bm25
+chromadb
+pydantic
+pytest
+openai
+tiktoken
