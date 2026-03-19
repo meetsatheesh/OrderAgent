@@ -1,52 +1,52 @@
 {
   "accuracy": 1.0,
-  "avg_latency": 0.4291039109896039,
+  "avg_latency": 0.4963867479117109,
   "total_cost": 0.006321499999999999,
   "results": [
     {
       "query": "Hello",
       "correct": true,
-      "latency": 0.1250299273320546
+      "latency": 0.3236300898808068
     },
     {
       "query": "How are you?",
       "correct": true,
-      "latency": 0.16502587111936368
+      "latency": 0.2768559206201075
     },
     {
       "query": "What is the capital of France?",
       "correct": true,
-      "latency": 0.3408892073109174
+      "latency": 0.3024526740667585
     },
     {
       "query": "Calculate 5 * 123",
       "correct": true,
-      "latency": 0.9541934459783691
+      "latency": 0.6654333919609077
     },
     {
       "query": "Search for the latest news on AI",
       "correct": true,
-      "latency": 0.63907031633467
+      "latency": 0.9114203195073182
     },
     {
       "query": "Compute the square root of 256",
       "correct": true,
-      "latency": 0.7591459992170742
+      "latency": 0.709890939808261
     },
     {
       "query": "Analyze the impact of climate change on agriculture in the next decade.",
       "correct": true,
-      "latency": 1.6538482687819132
+      "latency": 2.4030230301480024
     },
     {
       "query": "Compare the performance of Python and C++ for scientific computing.",
       "correct": true,
-      "latency": 2.180757483062641
+      "latency": 2.087781838847392
     },
     {
       "query": "Explain the theory of relativity in simple terms.",
       "correct": true,
-      "latency": 1.1020072945529065
+      "latency": 1.629480361267113
     },
     {
       "query": "Hello",
@@ -96,12 +96,12 @@
     {
       "query": "Extra query 0",
       "correct": true,
-      "latency": 0.33795217292206825
+      "latency": 0.23212851671550325
     },
     {
       "query": "Extra query 1",
       "correct": true,
-      "latency": 0.3151582331800963
+      "latency": 0.3766378754120536
     }
   ]
 }

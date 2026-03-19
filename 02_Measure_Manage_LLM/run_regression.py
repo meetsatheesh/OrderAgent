@@ -4,7 +4,7 @@ from eval_suite import EvaluationSuite, GOLDEN_SET, perform_regression_test
 from router import IntelligentRouter
 from models import MockProvider
 
-BASELINE_FILE = "baseline_eval.json"
+BASELINE_FILE = os.path.join(os.path.dirname(__file__), "baseline_eval.json")
 
 def run_evaluation(label: str):
     print(f"\n🚀 Running {label} Evaluation...")
