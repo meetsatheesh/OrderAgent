@@ -1,0 +1,107 @@
+{
+  "accuracy": 1.0,
+  "avg_latency": 0.4291039109896039,
+  "total_cost": 0.006321499999999999,
+  "results": [
+    {
+      "query": "Hello",
+      "correct": true,
+      "latency": 0.1250299273320546
+    },
+    {
+      "query": "How are you?",
+      "correct": true,
+      "latency": 0.16502587111936368
+    },
+    {
+      "query": "What is the capital of France?",
+      "correct": true,
+      "latency": 0.3408892073109174
+    },
+    {
+      "query": "Calculate 5 * 123",
+      "correct": true,
+      "latency": 0.9541934459783691
+    },
+    {
+      "query": "Search for the latest news on AI",
+      "correct": true,
+      "latency": 0.63907031633467
+    },
+    {
+      "query": "Compute the square root of 256",
+      "correct": true,
+      "latency": 0.7591459992170742
+    },
+    {
+      "query": "Analyze the impact of climate change on agriculture in the next decade.",
+      "correct": true,
+      "latency": 1.6538482687819132
+    },
+    {
+      "query": "Compare the performance of Python and C++ for scientific computing.",
+      "correct": true,
+      "latency": 2.180757483062641
+    },
+    {
+      "query": "Explain the theory of relativity in simple terms.",
+      "correct": true,
+      "latency": 1.1020072945529065
+    },
+    {
+      "query": "Hello",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "How are you?",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "What is the capital of France?",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Calculate 5 * 123",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Search for the latest news on AI",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Compute the square root of 256",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Analyze the impact of climate change on agriculture in the next decade.",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Compare the performance of Python and C++ for scientific computing.",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Explain the theory of relativity in simple terms.",
+      "correct": true,
+      "latency": 0.001
+    },
+    {
+      "query": "Extra query 0",
+      "correct": true,
+      "latency": 0.33795217292206825
+    },
+    {
+      "query": "Extra query 1",
+      "correct": true,
+      "latency": 0.3151582331800963
+    }
+  ]
+}
