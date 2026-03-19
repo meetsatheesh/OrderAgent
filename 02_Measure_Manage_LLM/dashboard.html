@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Observability Dashboard</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .metric-title {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            color: var(--accent);
+        }
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+        .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        
+        .chart-placeholder {
+            height: 200px;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0.1), transparent);
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .chart-placeholder::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>LLM System Health <span id="env-badge" class="status-badge badge-success">Production</span></h1>
+        <div style="text-align: right">
+            <div style="color: #94a3b8; font-size: 0.875rem">Last Updated</div>
+            <div id="timestamp">March 19, 2026 - 09:44 AM</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- Latency Card -->
+        <div class="card">
+            <div class="metric-title">p95 Latency</div>
+            <div class="metric-value">1.84s</div>
+            <div style="color: var(--warning); font-size: 0.875rem">↑ 12% vs last 24h</div>
+            <div class="chart-placeholder"></div>
+        </div>
+
+        <!-- Cost Card -->
+        <div class="card">
+            <div class="metric-title">Daily Accrued Cost</div>
+            <div class="metric-value">$0.34</div>
+            <div style="color: var(--success); font-size: 0.875rem">↓ 5% vs budget</div>
+            <div class="chart-placeholder"></div>
+        </div>
+
+        <!-- Accuracy/Grounding Card -->
+        <div class="card">
+            <div class="metric-title">Grounding Score</div>
+            <div class="metric-value">92.4%</div>
+            <span class="status-badge badge-success">Target: >90%</span>
+            <div class="chart-placeholder"></div>
+        </div>
+    </div>
+
+    <h2 style="margin-top: 3rem">Active Alerts</h2>
+    <div id="alerts-container">
+        <div class="alert-item">
+            <div>
+                <strong style="color: var(--danger)">BUDGET_EXCEEDED</strong>
+                <div style="font-size: 0.875rem; color: #94a3b8">Tenant: "MainApp" has exceeded the daily allocation of $0.01.</div>
+            </div>
+        </div>
+        <div class="alert-item" style="border-left-color: var(--warning); background: rgba(245, 158, 11, 0.1)">
+            <div>
+                <strong style="color: var(--warning)">LATENCY_WARNING</strong>
+                <div style="font-size: 0.875rem; color: #94a3b8">p95 latency is trending towards threshold (1.84s > 1.5s).</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

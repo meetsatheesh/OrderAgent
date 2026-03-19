@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "accuracy": 1.0,
+  "p95_latency": 0.6454586260047919,
+  "total_cost": 0.006321499999999999,
+  "regression_passed": true,
+  "tenant_costs": {
+    "default": 0.006321499999999999,
+    "Tenant_A": 2.65e-05,
+    "Tenant_B": 0,
+    "Default": 0
+  }
+}

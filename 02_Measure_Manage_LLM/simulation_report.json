@@ -1,0 +1,18 @@
+{
+  "cold": {
+    "p95": 0.001,
+    "cost": 0.0027790000000000002
+  },
+  "warm": {
+    "p95": 0.001,
+    "cost": 0.0
+  },
+  "distribution": {
+    "mock-fast (cached)": 99,
+    "mock-strong (cached)": 59,
+    "mock-tool (cached)": 39,
+    "mock-strong": 1,
+    "mock-tool": 1,
+    "mock-fast": 1
+  }
+}
