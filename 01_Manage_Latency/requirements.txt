@@ -1,0 +1,8 @@
+litellm
+pydantic
+structlog
+pytest
+pandas
+numpy
+sentence-transformers
+faiss-cpu
